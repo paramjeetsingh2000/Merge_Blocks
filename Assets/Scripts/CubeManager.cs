@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CubeManager : MonoBehaviour 
@@ -6,9 +7,11 @@ public class CubeManager : MonoBehaviour
     [SerializeField] private Transform cubePos;
     [SerializeField] private Cube cube, currentCube;
     [SerializeField] private float slideSpeed = 0.01f, force;
+    [SerializeField] private CubeData cubeData;
 
     private Vector2 lastPointerPosition;
     private bool isDragging = false;
+    int maxNum = 8;
 
     private void Awake()
     {
@@ -83,5 +86,20 @@ public class CubeManager : MonoBehaviour
     public void AddCube()
     {
         currentCube = Instantiate(cube,cubePos.position, Quaternion.identity);
+
+        List<OneCubeData> data = new();
+
+        foreach(var v in cubeData.data)
+        {
+            if (v.cubeNum <= maxNum)
+            {
+                data.Add(v);
+            }
+            else break;
+        }
+
+        OneCubeData oneData = data[Random.Range(0, data.Count)];
+
+        currentCube.SetCube(oneData.cubeNum, oneData.cubeColor);
     }
 }
