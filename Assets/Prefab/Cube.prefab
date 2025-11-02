@@ -1179,7 +1179,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9153529661866974088}
-  m_Material: {fileID: 13400000, guid: 020175e64472f5f428d1aea7a34c3934, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1214,6 +1214,7 @@ MonoBehaviour:
   - {fileID: 2310921204996740926}
   cubeNum: 0
   hasMerged: 0
+  canMerge: 1
 --- !u!54 &4002173328126671266
 Rigidbody:
   m_ObjectHideFlags: 0

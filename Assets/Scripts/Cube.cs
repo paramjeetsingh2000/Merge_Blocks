@@ -7,6 +7,8 @@ public class Cube : MonoBehaviour
     [SerializeField] private List<TMP_Text> _text;
     public int cubeNum;
     public bool hasMerged;
+    public bool canMerge = true;
+
 
     public void SetCube(int cubeNum, Color32 col)
     {
@@ -21,7 +23,9 @@ public class Cube : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (hasMerged) return;
+        if (hasMerged || !CubeManager.Instance.canMerge) return;
+
+
         Cube otherCube = collision.gameObject.GetComponent<Cube>();
 
         if (otherCube != null)
@@ -33,6 +37,8 @@ public class Cube : MonoBehaviour
                 int newNum = this.cubeNum * 2;
                 Vector3 mergePosition = (this.transform.position + otherCube.transform.position) / 2f;
                 CubeManager.Instance.SpawnMergedCube(newNum, mergePosition);
+                CubeManager.Instance.UpdateMaxNum(newNum);
+                ;
 
                 Destroy(this.gameObject);
                 Destroy(otherCube.gameObject);

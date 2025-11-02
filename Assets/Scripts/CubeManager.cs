@@ -8,6 +8,9 @@ public class CubeManager : MonoBehaviour
     [SerializeField] private Cube cube, currentCube;
     [SerializeField] private float slideSpeed = 0.01f, force;
     [SerializeField] private CubeData cubeData;
+    private int currentMaxNum = 2;
+    private bool canThrow = true;
+    public bool canMerge = true;
 
     private Vector2 lastPointerPosition;
     private bool isDragging = false;
@@ -32,6 +35,8 @@ public class CubeManager : MonoBehaviour
 
     public void OnPointerDown()
     {
+        if (!canThrow || currentCube == null) return;
+
         if (Input.touchCount > 0)
         {
             lastPointerPosition = Input.touches[0].position;
@@ -46,10 +51,35 @@ public class CubeManager : MonoBehaviour
 
     public void OnPointerUp()
     {
+        if (!canThrow || currentCube == null) return;
+
+        canThrow = false;
         isDragging = false;
-        currentCube.GetComponent<Rigidbody>().AddForce(Vector3.forward * force, ForceMode.Impulse);
-        Invoke("AddCube", 0.3f);
+        canMerge = false;
+
+
+        Rigidbody rb = currentCube.GetComponent<Rigidbody>();
+        if (rb != null)
+            rb.AddForce(Vector3.forward * force, ForceMode.Impulse);
+
+        Invoke(nameof(EnableThrow), 0.3f);
+        Invoke(nameof(AddCube), 0.3f);
+        Invoke(nameof(EnableMerging), 0.3f);
+
+        currentCube = null;
     }
+
+    private void EnableThrow()
+    {
+        canThrow = true;
+    }
+    private void EnableMerging()
+    {
+        canMerge = true;
+    }
+
+
+
 
     private void Update()
     {
@@ -86,14 +116,17 @@ public class CubeManager : MonoBehaviour
     public void AddCube()
     {
         currentCube = Instantiate(cube, cubePos.position, Quaternion.identity);
+        currentCube.canMerge = false;
+
 
         List<OneCubeData> data = new();
 
         foreach (var v in cubeData.data)
         {
-            if (v.cubeNum <= maxNum)
-            {
-                data.Add(v);
+             if (v.cubeNum <= Mathf.Min(maxNum, currentMaxNum))
+
+                {
+                    data.Add(v);
             }
             else break;
         }
@@ -122,5 +155,12 @@ public class CubeManager : MonoBehaviour
         newCube.SetCube(newCubeData.cubeNum, newCubeData.cubeColor);
 
     }
+
+    public void UpdateMaxNum(int mergedNum)
+    {
+        if (mergedNum > currentMaxNum)
+            currentMaxNum = mergedNum;
+    }
+
 
 }
