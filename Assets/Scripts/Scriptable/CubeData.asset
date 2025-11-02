@@ -12,3 +12,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36823d245e74abe488ca83fd4ecd4b21, type: 3}
   m_Name: CubeData
   m_EditorClassIdentifier: Assembly-CSharp::CubeData
+  data:
+  - cubeNum: 2
+    cubeColor:
+      serializedVersion: 2
+      rgba: 0
+  - cubeNum: 4
+    cubeColor:
+      serializedVersion: 2
+      rgba: 0
+  - cubeNum: 8
+    cubeColor:
+      serializedVersion: 2
+      rgba: 0
+  - cubeNum: 16
+    cubeColor:
+      serializedVersion: 2
+      rgba: 0
+  - cubeNum: 32
+    cubeColor:
+      serializedVersion: 2
+      rgba: 0
+  - cubeNum: 64
+    cubeColor:
+      serializedVersion: 2
+      rgba: 0
+  - cubeNum: 128
+    cubeColor:
+      serializedVersion: 2
+      rgba: 0
+  - cubeNum: 256
+    cubeColor:
+      serializedVersion: 2
+      rgba: 0
+  - cubeNum: 512
+    cubeColor:
+      serializedVersion: 2
+      rgba: 0
+  - cubeNum: 1024
+    cubeColor:
+      serializedVersion: 2
+      rgba: 0
+  - cubeNum: 2048
+    cubeColor:
+      serializedVersion: 2
+      rgba: 0

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeManager : MonoBehaviour 
+public class CubeManager : MonoBehaviour
 {
     public static CubeManager Instance { get; private set; }
     [SerializeField] private Transform cubePos;
@@ -11,7 +11,7 @@ public class CubeManager : MonoBehaviour
 
     private Vector2 lastPointerPosition;
     private bool isDragging = false;
-    int maxNum = 8;
+    int maxNum = 2048;
 
     private void Awake()
     {
@@ -85,11 +85,11 @@ public class CubeManager : MonoBehaviour
     }
     public void AddCube()
     {
-        currentCube = Instantiate(cube,cubePos.position, Quaternion.identity);
+        currentCube = Instantiate(cube, cubePos.position, Quaternion.identity);
 
         List<OneCubeData> data = new();
 
-        foreach(var v in cubeData.data)
+        foreach (var v in cubeData.data)
         {
             if (v.cubeNum <= maxNum)
             {
@@ -102,4 +102,25 @@ public class CubeManager : MonoBehaviour
 
         currentCube.SetCube(oneData.cubeNum, oneData.cubeColor);
     }
+
+    public void SpawnMergedCube(int number,Vector3 position)
+    {
+        OneCubeData newCubeData = null;
+        for (int i = 0; i < cubeData.data.Count; i++)
+        {
+            if (cubeData.data[i].cubeNum == number)
+            {
+                newCubeData = cubeData.data[i];
+                break;
+            }
+        }
+        if (newCubeData == null)
+        {
+            Debug.LogError("no cubedata found for number : " +  number);
+        }
+        Cube newCube = Instantiate(cube, position, Quaternion.identity);
+        newCube.SetCube(newCubeData.cubeNum, newCubeData.cubeColor);
+
+    }
+
 }

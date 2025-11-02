@@ -1085,6 +1085,7 @@ MonoBehaviour:
   currentCube: {fileID: 0}
   slideSpeed: 0.14
   force: 14
+  cubeData: {fileID: 11400000, guid: 9bea39b1c12cb004bab46e35b99338cf, type: 2}
 --- !u!4 &1193293748
 Transform:
   m_ObjectHideFlags: 0
