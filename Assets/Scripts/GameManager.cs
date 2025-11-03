@@ -53,6 +53,20 @@ public class GameManager : MonoBehaviour
             scoreText.text = "" + score;
     }
 
+    public GameObject losePanel;
+
+    public void GameOver()
+    {
+        Time.timeScale = 0f;
+        losePanel.SetActive(true);
+    }
+
+public void GoToMainMenu()
+{
+    Time.timeScale = 1f;
+    SceneManager.LoadScene("MainMenu");
+}
+
 
 }
 

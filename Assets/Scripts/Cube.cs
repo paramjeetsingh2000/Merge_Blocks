@@ -8,6 +8,27 @@ public class Cube : MonoBehaviour
     public int cubeNum;
     public bool hasMerged;
     public bool canMerge = true;
+    public bool isLaunched = false;
+    private bool hasLost = false;
+    private float loseCheckDelay = 1f; // wait before starting check
+    private float loseCheckTimer = 0f;
+
+    private void Update()
+    {
+        if (!isLaunched || hasLost) return;
+
+        loseCheckTimer += Time.deltaTime;
+        if (loseCheckTimer < loseCheckDelay) return;
+
+        
+        if (transform.position.z < -2)
+        {
+            hasLost = true;
+            GameManager.Instance.GameOver();
+        }
+    }
+
+
 
 
     public void SetCube(int cubeNum, Color32 col)

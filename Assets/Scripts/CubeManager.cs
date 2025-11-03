@@ -61,6 +61,7 @@ public class CubeManager : MonoBehaviour
         Rigidbody rb = currentCube.GetComponent<Rigidbody>();
         if (rb != null)
             rb.AddForce(Vector3.forward * force, ForceMode.Impulse);
+        currentCube.isLaunched = true;
 
         Invoke(nameof(EnableThrow), 0.3f);
         Invoke(nameof(AddCube), 0.3f);
