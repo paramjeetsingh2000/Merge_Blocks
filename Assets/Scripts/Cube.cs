@@ -58,6 +58,7 @@ public class Cube : MonoBehaviour
                 int newNum = this.cubeNum * 2;
                 Vector3 mergePosition = (this.transform.position + otherCube.transform.position) / 2f;
                 CubeManager.Instance.SpawnMergedCube(newNum, mergePosition);
+                AudioManager.Instance.PlayMergeSound();
                 GameManager.Instance.AddScore(newNum);
                 GameManager.Instance.WinGame(newNum);
                 CubeManager.Instance.UpdateMaxNum(newNum);
