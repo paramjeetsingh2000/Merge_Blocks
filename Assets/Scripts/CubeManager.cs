@@ -154,6 +154,7 @@ public class CubeManager : MonoBehaviour
         }
         Cube newCube = Instantiate(cube, position, Quaternion.identity);
         newCube.SetCube(newCubeData.cubeNum, newCubeData.cubeColor);
+        newCube.GetComponent<Rigidbody>().AddForce(new Vector3(0f, 1.5f, 1.5f), ForceMode.Impulse);
 
     }
 
