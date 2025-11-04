@@ -21,7 +21,7 @@ public class Cube : MonoBehaviour
         if (loseCheckTimer < loseCheckDelay) return;
 
         
-        if (transform.position.z < -2)
+        if (transform.position.z < -2.3)
         {
             hasLost = true;
             GameManager.Instance.GameOver();
